@@ -4,7 +4,7 @@ import ShowMenu from './show-menu';
 
 class BoardInfo extends Component {
     render() {
-        return(
+        return (
             <section className="board-info-bar">
                 <BoardControls />
                 <ShowMenu />

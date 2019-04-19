@@ -20,49 +20,49 @@ export const getData = () => async dispatch => {
   const cardUsers = await getCardsUsers();
   console.log(cardUsers);
   return dispatch(batchActions([
-      {type:GET_LISTS, data: lists},
-      {type:GET_CARDS, data: cards},
-      {type:GET_CARDS_POSITIONS, data: positions},
-      {type:GET_LIST_ORDER, data: listOrder},
-      {type:GET_USERS, data: users},
-      {type:GET_CARD_USERS,data: cardUsers}
-    ])
+    { type: GET_LISTS, data: lists },
+    { type: GET_CARDS, data: cards },
+    { type: GET_CARDS_POSITIONS, data: positions },
+    { type: GET_LIST_ORDER, data: listOrder },
+    { type: GET_USERS, data: users },
+    { type: GET_CARD_USERS, data: cardUsers }
+  ])
   );
 }
 
-export const updateData = (value,reason) => async dispatch => {
-  switch(reason) {
+export const updateData = (value, reason) => async dispatch => {
+  switch (reason) {
     case 'LIST':
-    {
-      const newList = await addNewList(value);
-      console.log(newList);
-      const newArrayOfCards = await addNewProductsList(newList.id);
-      console.log(newArrayOfCards);
-      const newListOrder = await getListOrder();
-      newListOrder.listPositions.push(newList.id);
-      addInOrder(newListOrder);
-      return dispatch(batchActions([
-          {type:UPDATE_LISTS, data: newList},
-          {type:ADD_NEW_ARRAY, data: newArrayOfCards},
-          {type:ADD_LIST_ORDER, data: newListOrder}
+      {
+        const newList = await addNewList(value);
+        console.log(newList);
+        const newArrayOfCards = await addNewProductsList(newList.id);
+        console.log(newArrayOfCards);
+        const newListOrder = await getListOrder();
+        newListOrder.listPositions.push(newList.id);
+        addInOrder(newListOrder);
+        return dispatch(batchActions([
+          { type: UPDATE_LISTS, data: newList },
+          { type: ADD_NEW_ARRAY, data: newArrayOfCards },
+          { type: ADD_LIST_ORDER, data: newListOrder }
         ])
-      );  
-    }
+        );
+      }
     case 'CARD':
-    {
-      const newCard = await addNewCard(value);
-      console.log(newCard);
-      const updatedArrayOfCards = await addCardInPositions(newCard.listId,newCard.id)
-      console.log(updatedArrayOfCards);
-      const newCardUsersArray = await addNewCardUsersArray(newCard.id);
-      return dispatch(batchActions([
-          {type:ADD_CARD, data: newCard},
-          {type:UPDATE_CARDS_POSITIONS, data: updatedArrayOfCards},
-          {type:ADD_CARD_USERS_ARRAY,data: newCardUsersArray},
+      {
+        const newCard = await addNewCard(value);
+        console.log(newCard);
+        const updatedArrayOfCards = await addCardInPositions(newCard.listId, newCard.id)
+        console.log(updatedArrayOfCards);
+        const newCardUsersArray = await addNewCardUsersArray(newCard.id);
+        return dispatch(batchActions([
+          { type: ADD_CARD, data: newCard },
+          { type: UPDATE_CARDS_POSITIONS, data: updatedArrayOfCards },
+          { type: ADD_CARD_USERS_ARRAY, data: newCardUsersArray },
         ])
-      );  
-    }
+        );
+      }
     default:
-    return;
+      return;
   }
 }

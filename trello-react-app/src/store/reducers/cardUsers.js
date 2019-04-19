@@ -13,7 +13,7 @@ function cardUsers(state = initialState, action) {
       ]
     case UPDATE_CARD_USERS:
       return state.map(user => {
-        if(user.id === action.data.id) {
+        if (user.id === action.data.id) {
           return action.data;
         }
         return user;

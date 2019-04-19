@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchForm from '../Forms/searchForm'
 import { getFilteredCards } from '../../store/actions/cards';
+import PropTypes from 'prop-types';
 
 export class SearchField extends Component {
 
@@ -16,15 +17,15 @@ export class SearchField extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-
-});
+SearchField.propTypes = {
+  getFilteredCards: PropTypes.func,
+}
 
 const mapDispatchToProps = {
   getFilteredCards
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(SearchField)

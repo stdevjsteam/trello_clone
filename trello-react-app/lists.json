@@ -2,18 +2,15 @@
   "cards": [
     {
       "name": "Complete ",
-      "description": "234",
-      "users": [
-        2,
-        3
-      ],
-      "listId": 2,
+      "description": "",
+      "listId": 1,
       "id": 1
     },
     {
       "id": 2,
       "listId": 3,
-      "name": "Email mock-up to client for feedback"
+      "name": "Email mock-up to client for feedback",
+      "description": ""
     },
     {
       "id": 3,
@@ -44,7 +41,8 @@
     {
       "id": 8,
       "listId": 1,
-      "name": "Read new Smashing Magazine articles"
+      "name": "Read new Smashing Magazine articles",
+      "description": ""
     },
     {
       "id": 9,
@@ -66,10 +64,7 @@
       "name": "CodePen work",
       "description": "",
       "listId": 2,
-      "id": 12,
-      "users": [
-        2
-      ]
+      "id": 12
     },
     {
       "id": 13,
@@ -139,10 +134,9 @@
       "id": 25
     },
     {
-      "id": 7,
+      "id": 26,
       "listId": 3,
       "name": "CSS Methodologies (BEM, SMACSS etc.",
-      "users": [],
       "description": ""
     },
     {
@@ -283,6 +277,7 @@
     {
       "listId": 1,
       "positionsArray": [
+        1,
         2,
         3,
         4,
@@ -293,7 +288,6 @@
     {
       "listId": 2,
       "positionsArray": [
-        1,
         6,
         7,
         8,
@@ -339,10 +333,10 @@
       "listId": 6,
       "positionsArray": [
         26,
+        30,
         27,
         28,
-        29,
-        30
+        29
       ],
       "id": 6
     },
@@ -396,10 +390,7 @@
   "cardUsers": [
     {
       "cardId": 1,
-      "users": [
-        2,
-        3
-      ],
+      "users": [],
       "id": 1
     },
     {
@@ -544,7 +535,10 @@
     },
     {
       "cardId": 30,
-      "users": [],
+      "users": [
+        1,
+        2
+      ],
       "id": 30
     },
     {

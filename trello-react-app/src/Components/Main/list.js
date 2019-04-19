@@ -8,6 +8,7 @@ import Item from './item';
 import { getCurrentCard } from '../../store/actions/currentCard';
 import Modal from 'react-modal';
 import { deleteCurrentCard } from '../../store/actions/currentCard';
+import PropTypes from 'prop-types';
 
 
 class List extends Component {
@@ -22,7 +23,7 @@ class List extends Component {
     })
   }
 
-  handleSubmit = async (value, id) => {
+  handleSubmit = (value, id) => {
     value.listId = id;
     this.props.updateData(value, "CARD");
     this.setState({
@@ -32,7 +33,7 @@ class List extends Component {
   }
 
   openModal = (event) => {
-    this.props.getCurrentCard(event.currentTarget.getAttribute('cardId'));
+    this.props.getCurrentCard(event.currentTarget.getAttribute('cardid'));
     this.setState({
       modalIsOpen: true,
     })
@@ -77,8 +78,8 @@ class List extends Component {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
-                      {listPosition.positionsArray.map((cardId, index) => {
-                        const item = this.props.cards.find((card) => card.id === cardId);
+                      {listPosition.positionsArray.map((cardid, index) => {
+                        const item = this.props.cards.find((card) => card.id === cardid);
                         if (item === undefined) {
                           return;
                         }
@@ -93,10 +94,10 @@ class List extends Component {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                               onClick={this.openModal}
-                              cardId={cardId}
+                              cardid={cardid}
                             >
-                              <Item 
-                                key={index}     
+                              <Item
+                                key={index}
                                 item={item}
                               />
                             </div>
@@ -113,26 +114,37 @@ class List extends Component {
                 {this.state.addingCard
                   ? (<NewItemForm onSubmit={(value) => this.handleSubmit(value, this.props.currentList.id)}
                   />)
-                  : (<button class="add-card-btn btn" onClick={this.handleClick}>Add a card</button>)
+                  : (<button className="add-card-btn btn" onClick={this.handleClick}>Add a card</button>)
                 }
               </div>
             )}
           </Draggable>
-          {(this.state.modalIsOpen
-            && this.props.currentCard.length !== 0)
+          {Object.keys(this.props.currentCard).length !== 0
             &&
             <Modal
+              ariaHideApp={false}
               isOpen={this.state.modalIsOpen}
               onRequestClose={this.closeModal}
-              className='modal'
+              className="Modal"
+              overlayclassName="Overlay"
               contentLabel="Example Modal"
             >
-              <EditList closeModal={this.closeModal}/>
+              <EditList closeModal={this.closeModal} />
             </Modal>}
         </>
       )
     )
   }
+}
+
+List.propTypes = {
+  getCurrentCard: PropTypes.func,
+  deleteCurrentCard: PropTypes.func,
+  updateData: PropTypes.func,
+  positions: PropTypes.arrayOf(PropTypes.object),
+  currentCard: PropTypes.object,
+  currentList: PropTypes.object,
+  uniqueKey: PropTypes.number,
 }
 
 const mapStateToProps = state => {

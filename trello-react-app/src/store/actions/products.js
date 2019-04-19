@@ -11,7 +11,7 @@ export const getCardsPositions = async () => {
   return positons;
 }
 
-export const updateArray =  (
+export const updateArray = (
   sourceArray,
   destinationArray,
   source,
@@ -31,9 +31,9 @@ export const updateArray =  (
       headers: new Headers({ 'content-type': 'application/json' }),
       body: JSON.stringify(value)
     })
-    .then(response => response.json())
+      .then(response => response.json())
     value.id = sourceListId;
-    return dispatch({type:UPDATE_CARDS_POSITIONS, data:value});
+    return dispatch({ type: UPDATE_CARDS_POSITIONS, data: value });
   } else {
     const idOfRemovedCard = sourceArray[source];
     const [replaced] = sourceArray.splice(source, 1);
@@ -53,38 +53,40 @@ export const updateArray =  (
         "listId": destinationListId,
       })
     })
-    .then((response) => response.json())
-    .then((card) => dispatch(batchActions([
-      { type:UPDATE_CARDS, data: card},
-      { type:UPDATE_CARDS_POSITIONS, 
-        data: {
-        ...sourceObjectData,
-        id: sourceListId
-        } 
-      },
-      { type:UPDATE_CARDS_POSITIONS, 
-        data: {
-        ...destinationObjectData,
-        id: destinationListId
-        } 
-      }
-    ])));
+      .then((response) => response.json())
+      .then((card) => dispatch(batchActions([
+        { type: UPDATE_CARDS, data: card },
+        {
+          type: UPDATE_CARDS_POSITIONS,
+          data: {
+            ...sourceObjectData,
+            id: sourceListId
+          }
+        },
+        {
+          type: UPDATE_CARDS_POSITIONS,
+          data: {
+            ...destinationObjectData,
+            id: destinationListId
+          }
+        }
+      ])));
 
     fetch(`http://localhost:3004/positions/${sourceListId}`, {
       method: 'PUT',
       headers: new Headers({ 'content-type': 'application/json' }),
       body: JSON.stringify(sourceObjectData)
     })
-    .then(response => response.json())
-    .then(data => console.log(data));
-    destinationArray.splice(destination,0,replaced);
+      .then(response => response.json())
+      .then(data => console.log(data));
+    destinationArray.splice(destination, 0, replaced);
     fetch(`http://localhost:3004/positions/${destinationListId}`, {
       method: 'PUT',
       headers: new Headers({ 'content-type': 'application/json' }),
       body: JSON.stringify(destinationObjectData)
     })
-    .then(response => response.json())
-    .then(data => console.log(data));
+      .then(response => response.json())
+      .then(data => console.log(data));
   }
 }
 
@@ -94,28 +96,28 @@ export const addNewProductsList = async (listId) => {
     headers: new Headers({ 'content-type': 'application/json' }),
     body: JSON.stringify({
       "listId": listId,
-      "positionsArray": [ ]
+      "positionsArray": []
     })
   })
-  .then(response => response.json());
+    .then(response => response.json());
   return newArray;
 }
 
-export const addCardInPositions = async (id,cardId) => {
+export const addCardInPositions = async (id, cardId) => {
   const cards = await fetch(`http://localhost:3004/positions?listId=${id}`)
-  .then(response => response.json());
+    .then(response => response.json());
   const updatedArray = await fetch(`http://localhost:3004/positions/${id}`, {
-      method: 'PUT',
-      headers: new Headers({ 'content-type': 'application/json' }),
-      body: JSON.stringify({
-        "listId": id,
-        "positionsArray": [
-          ...cards[0].positionsArray,
-          cardId
-        ]
-      })
+    method: 'PUT',
+    headers: new Headers({ 'content-type': 'application/json' }),
+    body: JSON.stringify({
+      "listId": id,
+      "positionsArray": [
+        ...cards[0].positionsArray,
+        cardId
+      ]
     })
+  })
     .then(response => response.json());
   return updatedArray;
-    
+
 }

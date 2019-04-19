@@ -13,12 +13,12 @@ class App extends Component {
   }
 
   render() {
-    return (     
-        <div>
-          <Header />
-          <BoardInfo />
-          <Main />
-        </div>
+    return (
+      <div>
+        <Header />
+        <BoardInfo />
+        <Main />
+      </div>
     );
   }
 }

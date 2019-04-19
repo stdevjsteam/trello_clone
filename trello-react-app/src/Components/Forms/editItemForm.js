@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 let EditItemForm = props => {
-  const { handleSubmit, users} = props;
+  const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
       <div>

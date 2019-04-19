@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NewUserForm from '../Forms/newUserForm';
 import { addNewUser } from '../../store/actions/users';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 
 export class AddNewUser extends Component {
 
@@ -12,16 +13,21 @@ export class AddNewUser extends Component {
 
   render() {
     return (
-      <NewUserForm onSubmit={this.handleSubmit}/>
+      <NewUserForm onSubmit={this.handleSubmit} />
     )
   }
 }
 
+AddNewUser.propTypes = {
+  addNewUser: PropTypes.func,
+  closeModal: PropTypes.func,
+}
+
 const mapDispatchToProps = {
-  addNewUser, 
+  addNewUser,
 };
 
 export default connect(
   null,
   mapDispatchToProps,
-  )(AddNewUser);
+)(AddNewUser);

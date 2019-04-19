@@ -5,7 +5,7 @@ import UserSettings from './user-settings';
 
 class Header extends Component {
     render() {
-        return(
+        return (
             <header className="masthead">
                 <BoardMenu />
                 <HeaderLogo />

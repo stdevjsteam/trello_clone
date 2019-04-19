@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class HeaderLogo extends Component {
-    render () {
+    render() {
         return (
             <div className="logo">
 
@@ -10,6 +10,6 @@ class HeaderLogo extends Component {
             </div>
         );
     }
-} 
+}
 
 export default HeaderLogo;

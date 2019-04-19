@@ -3,16 +3,16 @@ import { GET_USERS, ADD_NEW_USER } from '../actions/users';
 const initialState = [];
 
 function users(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case GET_USERS:
-    return action.data;
+      return action.data;
     case ADD_NEW_USER:
-    return [
-      ...state,
-      action.data
-    ];
+      return [
+        ...state,
+        action.data
+      ];
     default:
-    return state;
+      return state;
   }
 }
 

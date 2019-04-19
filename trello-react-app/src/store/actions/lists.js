@@ -13,6 +13,6 @@ export const addNewList = async (value) => {
     headers: new Headers({ 'content-type': 'application/json' }),
     body: JSON.stringify(value)
   })
-  .then((response) => response.json());
+    .then((response) => response.json());
   return newList;
 }

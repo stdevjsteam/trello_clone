@@ -14,11 +14,11 @@ export const addNewCard = async (value) => {
     headers: new Headers({ 'content-type': 'application/json' }),
     body: JSON.stringify(value)
   })
-  .then((response) => response.json());
+    .then((response) => response.json());
   return newCard;
 }
 
-export const updateCard = (value,oldCard) => async dispatch => {
+export const updateCard = (value, oldCard) => async dispatch => {
   const newValue = {
     "name": value.name,
     "description": value.description,
@@ -27,19 +27,19 @@ export const updateCard = (value,oldCard) => async dispatch => {
   const updatedCard = await fetch('http://localhost:3004/cards/' + oldCard.id, {
     method: 'PATCH',
     headers: new Headers({ 'content-type': 'application/json' }),
-    body: JSON.stringify({...newValue})
+    body: JSON.stringify({ ...newValue })
   })
-  .then(response => response.json())
-  return dispatch({type: UPDATE_CARDS,data: updatedCard});
+    .then(response => response.json())
+  return dispatch({ type: UPDATE_CARDS, data: updatedCard });
 }
 
 export const getFilteredCards = (value) => async dispatch => {
   let filteredCards = '';
-  if(value.search === undefined) {
+  if (value.search === undefined) {
     filteredCards = await getCards();
   } else {
     filteredCards = await fetch(`http://localhost:3004/cards?name_like=${value.search}`)
-    .then(response => response.json())
+      .then(response => response.json())
   }
-  return dispatch({type: GET_CARDS,data: filteredCards});
+  return dispatch({ type: GET_CARDS, data: filteredCards });
 }
